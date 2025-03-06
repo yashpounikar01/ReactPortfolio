@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/motion";
+import { fadeIn, revealVariant, containerVariant } from "@/lib/motion";
 import SkillBar from "@/components/SkillBar";
 
 const skills = [
@@ -15,30 +15,28 @@ const skills = [
 export default function Skills() {
   return (
     <section id="skills" className="py-20 px-4 bg-muted/30">
-      <div className="max-w-4xl mx-auto">
+      <motion.div
+        className="max-w-4xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariant}
+      >
         <motion.h2
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          variants={fadeIn("up", "tween", 0.2, 1)}
+          variants={revealVariant}
           className="text-3xl font-bold text-center mb-12"
         >
           Skills
         </motion.h2>
         <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          variants={fadeIn("up", "tween", 0.3, 1)}
+          variants={containerVariant}
           className="grid gap-6"
         >
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              variants={revealVariant}
+              custom={index}
             >
               <SkillBar
                 name={skill.name}
@@ -48,7 +46,7 @@ export default function Skills() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
