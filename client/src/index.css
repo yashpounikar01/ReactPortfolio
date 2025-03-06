@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Typing effect styles */
+.typing-text::before {
+  content: 'Software Engineer';
+  animation: typing 8s steps(30) infinite;
+  border-right: 3px solid;
+  padding-right: 5px;
+  animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+@keyframes typing {
+  0%, 33% {
+    content: 'Software Engineer';
+  }
+  34%, 66% {
+    content: 'Full Stack Developer';
+  }
+  67%, 100% {
+    content: 'Backend Developer';
+  }
+}
+
+/* Cursor blink effect */
+.typing-text::after {
+  content: '';
+  border-right: 3px solid;
+  animation: blink 0.7s infinite;
+  animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+
 @layer base {
   * {
     @apply border-border;

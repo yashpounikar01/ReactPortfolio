@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
@@ -16,10 +16,16 @@ export default function Hero() {
         />
         <motion.h1
           variants={fadeIn("up", "tween", 0.3, 1)}
-          className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 text-transparent bg-clip-text"
+          className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 text-transparent bg-clip-text"
         >
-          Hi, I'm a Software Engineer
+          Hi, I'm Yash Pounikar
         </motion.h1>
+        <motion.div
+          variants={fadeIn("up", "tween", 0.3, 1)}
+          className="text-3xl md:text-5xl font-bold mb-6 h-14 flex items-center"
+        >
+          <span className="typing-text"></span>
+        </motion.div>
         <motion.p
           variants={fadeIn("up", "tween", 0.4, 1)}
           className="text-lg md:text-xl text-muted-foreground mb-8"
