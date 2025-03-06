@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import ProjectModel from "./ProjectModel";
 
 interface ProjectProps {
   project: {
@@ -69,7 +68,13 @@ export default function ProjectCard({ project }: ProjectProps) {
     >
       <Card className="overflow-hidden h-full">
         <CardHeader className="p-0">
-          <ProjectModel />
+          <motion.img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-48 object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          />
         </CardHeader>
         <CardContent className="p-6">
           <motion.h3 

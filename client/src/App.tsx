@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
+import Chatbot from "@/components/Chatbot";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <ScrollProgress />
         <Navbar />
         <Router />
+        <Chatbot />
         <Toaster />
       </QueryClientProvider>
     </ThemeProvider>
