@@ -7,12 +7,20 @@ export default function About() {
     <section id="about" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.h2
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
           variants={fadeIn("up", "tween", 0.2, 1)}
           className="text-3xl font-bold text-center mb-12"
         >
           About Me
         </motion.h2>
-        <motion.div variants={fadeIn("up", "tween", 0.3, 1)}>
+        <motion.div 
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={fadeIn("up", "tween", 0.3, 1)}
+        >
           <Card>
             <CardContent className="p-6">
               <p className="text-lg leading-relaxed text-muted-foreground">
