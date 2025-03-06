@@ -70,7 +70,7 @@ export default function Hero() {
       <div className="max-w-4xl mx-auto text-center">
         <motion.img
           variants={fadeIn("up", "tween", 0.2, 1)}
-          src="https://images.unsplash.com/photo-1573496799515-eebbb63814f2"
+          src="https://avatars.githubusercontent.com/u/79402434?s=400&u=503086fd7fecd8cc3817f79fe51fddc990aae5ed&v=4"
           alt="Profile"
           className="w-32 h-32 rounded-full mx-auto mb-8 object-cover"
         />
