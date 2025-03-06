@@ -21,8 +21,16 @@ const presetResponses = [
     response: "I'm currently in my 3rd year at PJLCE, pursuing a Bachelor's in Technology with a focus on Artificial Intelligence.",
   },
   {
-    keywords: ["skills", "technologies", "programming", "languages", "tech"],
+    keywords: ["skills"],
+    response: "Yash has both technical skills and soft skills. Technical skills include Java, Python, Node.js, Express.js, Flask, MySQL, and MongoDB. His soft skills include problem-solving, teamwork, communication, and adaptability.",
+  },
+  {
+    keywords: ["technologies", "programming", "languages", "tech"],
     response: "I'm proficient in programming languages like C and Java, with a strong foundation in Object-Oriented Programming. Web development is my main domain of interest, where I have extensive knowledge and continue to learn new technologies.",
+  },
+  {
+    keywords: ["job", "roles", "position", "hire", "offer"],
+    response: "Yash is available for the following job roles: Software Engineer, Full-Stack Developer, and Backend Developer.",
   },
   {
     keywords: ["web", "development", "frontend", "backend"],
