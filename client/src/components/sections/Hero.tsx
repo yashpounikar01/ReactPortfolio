@@ -18,13 +18,14 @@ export default function Hero() {
           variants={fadeIn("up", "tween", 0.3, 1)}
           className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 text-transparent bg-clip-text"
         >
-          Software Engineer
+          Hi, I'm a Software Engineer
         </motion.h1>
         <motion.p
           variants={fadeIn("up", "tween", 0.4, 1)}
           className="text-lg md:text-xl text-muted-foreground mb-8"
         >
-          Building innovative solutions with modern technologies
+          I'm a 3rd-year undergraduate student at PJLCE pursuing my Bachelor's in Technology in AI.
+          Building innovative solutions with modern technologies.
         </motion.p>
         <motion.div variants={fadeIn("up", "tween", 0.5, 1)}>
           <Button
