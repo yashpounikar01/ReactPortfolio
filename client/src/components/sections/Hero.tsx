@@ -1,40 +1,45 @@
+
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
-// Make sure we cleanup any existing animation on unmount
-
 export default function Hero() {
   useEffect(() => {
-    // No need to redefine the animation logic here
-    // It's handled globally in main.tsx
+    const phrases = [
+      'Software Engineer',
+      'Full Stack Developer',
+      'Backend Developer'
+    ];
+    
     const typingContainer = document.getElementById('typing-container');
+    let currentPhraseIndex = 0;
     
-    // Trigger the global animation
-    const event = new Event('app-mounted');
-    document.dispatchEvent(event);
+    function startTypingAnimation() {
+      if (!typingContainer) return;
+      
+      const currentPhrase = phrases[currentPhraseIndex];
+      let charIndex = 0;
+      typingContainer.textContent = '';
+      
+      // Typing phase
+      const typingInterval = setInterval(() => {
+        if (charIndex < currentPhrase.length) {
+          typingContainer.textContent += currentPhrase.charAt(charIndex);
+          charIndex++;
+        } else {
+          clearInterval(typingInterval);
+          setTimeout(startDeletingAnimation, 1500); // Wait before starting delete
+        }
+      }, 100);
+    }
     
-    return () => {
-      // Cleanup on unmount
-      if (window.typingIntervalId) {
-        clearInterval(window.typingIntervalId);
-        window.typingIntervalId = null;
-      }
+    function startDeletingAnimation() {
+      if (!typingContainer) return;
       
-      if (window.deletingIntervalId) {
-        clearInterval(window.deletingIntervalId);
-        window.deletingIntervalId = null;
-      }
+      let text = typingContainer.textContent || '';
       
-      // Clear the container text
-      if (typingContainer) {
-        typingContainer.textContent = '';
-      }
-    };
-  }, []);
-
       // Deleting phase
       const deletingInterval = setInterval(() => {
         if (text.length > 0) {
@@ -47,10 +52,10 @@ export default function Hero() {
         }
       }, 50);
     }
-
+    
     // Start the animation
     startTypingAnimation();
-
+    
     // Cleanup on component unmount
     return () => {
       const typingContainer = document.getElementById('typing-container');
@@ -59,7 +64,7 @@ export default function Hero() {
       }
     };
   }, []);
-
+  
   return (
     <section className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -79,10 +84,7 @@ export default function Hero() {
           variants={fadeIn("up", "tween", 0.3, 1)}
           className="w-full flex justify-center mb-6"
         >
-          <div id="typing-container" className="typing-text">
-            {/* Typing effect will be rendered here */}
-            <span className="typing-cursor"></span>
-          </div>
+          <div className="typing-text" id="typing-container"></div>
         </motion.div>
         <motion.p
           variants={fadeIn("up", "tween", 0.4, 1)}

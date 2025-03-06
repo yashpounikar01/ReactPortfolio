@@ -12,17 +12,6 @@ const container = document.getElementById('root');
 
 // Function to handle the typing animation
 function setupTypingAnimation() {
-  // Remove any existing typing interval to prevent duplicates
-  if (window.typingIntervalId) {
-    clearInterval(window.typingIntervalId);
-    window.typingIntervalId = null;
-  }
-  
-  if (window.deletingIntervalId) {
-    clearInterval(window.deletingIntervalId);
-    window.deletingIntervalId = null;
-  }
-
   const phrases = [
     'Software Engineer',
     'Full Stack Developer',
@@ -30,11 +19,6 @@ function setupTypingAnimation() {
   ];
   
   const typingContainer = document.getElementById('typing-container');
-  if (!typingContainer) return;
-  
-  // Clear any existing content
-  typingContainer.textContent = '';
-  
   let currentPhraseIndex = 0;
   
   function startTypingAnimation() {
@@ -45,15 +29,12 @@ function setupTypingAnimation() {
     typingContainer.textContent = '';
     
     // Typing phase
-    window.typingIntervalId = setInterval(() => {
+    const typingInterval = setInterval(() => {
       if (charIndex < currentPhrase.length) {
         typingContainer.textContent += currentPhrase.charAt(charIndex);
         charIndex++;
       } else {
-        if (window.typingIntervalId) {
-          clearInterval(window.typingIntervalId);
-          window.typingIntervalId = null;
-        }
+        clearInterval(typingInterval);
         setTimeout(startDeletingAnimation, 1500); // Wait before starting delete
       }
     }, 100);
@@ -65,15 +46,12 @@ function setupTypingAnimation() {
     let text = typingContainer.textContent || '';
     
     // Deleting phase
-    window.deletingIntervalId = setInterval(() => {
+    const deletingInterval = setInterval(() => {
       if (text.length > 0) {
         text = text.substring(0, text.length - 1);
         typingContainer.textContent = text;
       } else {
-        if (window.deletingIntervalId) {
-          clearInterval(window.deletingIntervalId);
-          window.deletingIntervalId = null;
-        }
+        clearInterval(deletingInterval);
         currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
         setTimeout(startTypingAnimation, 500); // Wait before typing next phrase
       }
@@ -84,23 +62,8 @@ function setupTypingAnimation() {
   startTypingAnimation();
 }
 
-// TypeScript declaration to prevent errors
-declare global {
-  interface Window {
-    typingIntervalId: number | null;
-    deletingIntervalId: number | null;
-  }
-}
-
-// Initialize interval IDs
-window.typingIntervalId = null;
-window.deletingIntervalId = null;
-
 // Set up the animation after page load
 window.addEventListener('DOMContentLoaded', setupTypingAnimation);
-
-// Also try to set up animation when app mounts (React hydration)
-document.addEventListener('app-mounted', setupTypingAnimation);
 
 // Also try to set up animation when app mounts (React hydration)
 document.addEventListener('app-mounted', setupTypingAnimation);

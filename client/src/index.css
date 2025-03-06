@@ -5,25 +5,29 @@
 /* Typing effect styles */
 .typing-text {
   position: relative;
-  display: inline-block;
-  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)/0.8));
+  margin: 0 auto;
+  text-align: center;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background: linear-gradient(to right, hsl(var(--primary)), #a855f7);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 2.25rem;
-  font-weight: 600;
 }
 
-.typing-cursor {
-  display: inline-block;
+.typing-text::after {
+  content: "";
+  position: absolute;
+  right: -5px;
   width: 3px;
-  height: 1.5em;
+  height: 80%;
   background-color: hsl(var(--primary));
-  margin-left: 2px;
-  vertical-align: middle;
   animation: cursor-blink 0.8s infinite;
-  position: relative;
-  top: -2px;
+  margin-left: 3px;
 }
 
 @keyframes cursor-blink {
@@ -40,119 +44,4 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-}
-
-/* Glassmorphism Effect */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-/* Text glow effect for headings */
-.glow-text {
-  text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5),
-               0 0 20px rgba(var(--primary-rgb), 0.3),
-               0 0 30px rgba(var(--primary-rgb), 0.1);
-}
-
-/* Hide default cursor when using custom cursor */
-body {
-  cursor: none;
-}
-
-/* Animated underline for links */
-.animated-underline {
-  position: relative;
-  display: inline-block;
-}
-
-.animated-underline::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background-color: hsl(var(--primary));
-  transition: width 0.3s ease;
-}
-
-.animated-underline:hover::after {
-  width: 100%;
-}
-
-/* 3D card effect */
-.card-3d {
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transition: transform 0.3s ease;
-}
-
-.card-3d:hover {
-  transform: rotateY(5deg) rotateX(5deg);
-}
-
-.card-3d::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.1) 40%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.1) 60%,
-    transparent 70%
-  );
-  filter: brightness(1.5);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-3d:hover::before {
-  opacity: 1;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.5);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.8);
-}
-
-/* Page transitions */
-.page-transition-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.5s, transform 0.5s;
-}
-
-.page-transition-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.5s, transform 0.5s;
 }
