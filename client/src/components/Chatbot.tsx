@@ -12,16 +12,59 @@ interface Message {
 }
 
 const presetResponses = [
-  "Hi! Let me know if you have any questions about my projects or experience.",
-  "I specialize in full-stack development with React, Node.js, and Python.",
-  "Feel free to check out my projects section for more details about my work.",
-  "You can reach me through the contact form above for professional inquiries.",
+  {
+    keywords: ["who", "name", "about"],
+    response: "Hi! I'm Yash Pounikar, a software engineer and 3rd-year undergraduate student at PJLCE pursuing B.Tech in Artificial Intelligence.",
+  },
+  {
+    keywords: ["education", "study", "college", "university", "degree"],
+    response: "I'm currently in my 3rd year at PJLCE, pursuing a Bachelor's in Technology with a focus on Artificial Intelligence.",
+  },
+  {
+    keywords: ["skills", "technologies", "programming", "languages", "tech"],
+    response: "I'm proficient in programming languages like C and Java, with a strong foundation in Object-Oriented Programming. Web development is my main domain of interest, where I have extensive knowledge and continue to learn new technologies.",
+  },
+  {
+    keywords: ["web", "development", "frontend", "backend"],
+    response: "Web development is my primary area of expertise. I'm constantly learning and improving my skills in this domain.",
+  },
+  {
+    keywords: ["experience", "work", "project"],
+    response: "I have experience with various programming languages and technologies, particularly focusing on web development projects. I'm passionate about creating efficient and user-friendly applications.",
+  },
+  {
+    keywords: ["hi", "hello", "hey"],
+    response: "Hello! I'm a chatbot assistant for Yash's portfolio. How can I help you learn more about Yash's experience and skills?",
+  },
 ];
+
+function findBestResponse(input: string): string {
+  const lowercaseInput = input.toLowerCase();
+  let bestMatch = {
+    keywords: 0,
+    response: "I'm here to help answer questions about Yash's background and experience. Feel free to ask about his education, skills, or web development experience!"
+  };
+
+  for (const preset of presetResponses) {
+    const matchingKeywords = preset.keywords.filter(keyword => 
+      lowercaseInput.includes(keyword.toLowerCase())
+    ).length;
+
+    if (matchingKeywords > bestMatch.keywords) {
+      bestMatch = {
+        keywords: matchingKeywords,
+        response: preset.response
+      };
+    }
+  }
+
+  return bestMatch.response;
+}
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hi! How can I help you today?", isUser: false },
+    { text: "Hi! I'm Yash's portfolio assistant. How can I help you?", isUser: false },
   ]);
   const [input, setInput] = useState("");
 
@@ -36,11 +79,11 @@ export default function Chatbot() {
     setMessages(newMessages);
     setInput("");
 
-    // Simulate bot response
+    // Generate response based on input
     setTimeout(() => {
-      const randomResponse = presetResponses[Math.floor(Math.random() * presetResponses.length)];
-      setMessages([...newMessages, { text: randomResponse, isUser: false }]);
-    }, 1000);
+      const response = findBestResponse(input);
+      setMessages([...newMessages, { text: response, isUser: false }]);
+    }, 500);
   };
 
   return (
@@ -69,7 +112,7 @@ export default function Chatbot() {
           >
             <Card className="w-80">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Chat</CardTitle>
+                <CardTitle className="text-sm font-medium">Chat with Yash's Assistant</CardTitle>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -104,7 +147,7 @@ export default function Chatbot() {
                 </ScrollArea>
                 <div className="flex gap-2 mt-4">
                   <Input
-                    placeholder="Type a message..."
+                    placeholder="Ask about Yash..."
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSend()}
