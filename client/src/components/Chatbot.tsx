@@ -22,7 +22,11 @@ const presetResponses = [
   },
   {
     keywords: ["skills"],
-    response: "Yash has both technical skills and soft skills. Technical skills include Java, Python, Node.js, Express.js, Flask, MySQL, and MongoDB. His soft skills include problem-solving, teamwork, communication, and adaptability.",
+    response: "Yash has both technical skills and soft skills. Technical skills include Java, Python, Node.js, Express.js, Flask, MySQL, and MongoDB. His soft skills include problem-solving, teamwork, communication, leadership, and adaptability.",
+  },
+  {
+    keywords: ["5 years", "five years", "future plans", "career plans", "see yourself"],
+    response: "In the next 5 years, Yash plans to start with a technical role to strengthen his foundation and gain hands-on experience, then eventually transition towards management. He aims to move into a Product Management role where he can leverage both his technical expertise and leadership skills to guide product development and strategy.",
   },
   {
     keywords: ["technologies", "programming", "languages", "tech"],
