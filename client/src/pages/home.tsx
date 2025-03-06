@@ -1,5 +1,4 @@
 import React from "react";
-import ParticleBackground from "@/components/ParticleBackground";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -10,7 +9,6 @@ import Footer from "@/components/sections/Footer";
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-background">
-      <ParticleBackground />
       <div className="relative z-10">
         <Hero />
         <About />

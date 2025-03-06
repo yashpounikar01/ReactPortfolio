@@ -9,8 +9,8 @@ import Home from "@/pages/home";
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import Chatbot from "@/components/Chatbot";
-import ParticleBackground from "@/components/ParticleBackground"; // Added
-import CustomCursor from "@/components/CustomCursor"; // Added
+import ParticleBackground from "@/components/ParticleBackground";
+import CustomCursor from "@/components/CustomCursor";
 
 function Router() {
   return (
@@ -25,8 +25,8 @@ function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="portfolio-theme">
       <QueryClientProvider client={queryClient}>
-        <ParticleBackground /> {/* Added */}
-        <CustomCursor /> {/* Added */}
+        <ParticleBackground />
+        <CustomCursor />
         <ScrollProgress />
         <Navbar />
         <Router />

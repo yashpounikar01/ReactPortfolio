@@ -4,40 +4,36 @@ import { fadeIn } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
+// Make sure we cleanup any existing animation on unmount
+
 export default function Hero() {
   useEffect(() => {
-    const phrases = [
-      'Software Engineer',
-      'Full Stack Developer',
-      'Backend Developer'
-    ];
-
+    // No need to redefine the animation logic here
+    // It's handled globally in main.tsx
     const typingContainer = document.getElementById('typing-container');
-    let currentPhraseIndex = 0;
-
-    function startTypingAnimation() {
-      if (!typingContainer) return;
-
-      const currentPhrase = phrases[currentPhraseIndex];
-      let charIndex = 0;
-      typingContainer.textContent = '';
-
-      // Typing phase
-      const typingInterval = setInterval(() => {
-        if (charIndex < currentPhrase.length) {
-          typingContainer.textContent += currentPhrase.charAt(charIndex);
-          charIndex++;
-        } else {
-          clearInterval(typingInterval);
-          setTimeout(startDeletingAnimation, 1500); // Wait before starting delete
-        }
-      }, 100);
-    }
-
-    function startDeletingAnimation() {
-      if (!typingContainer) return;
-
-      let text = typingContainer.textContent || '';
+    
+    // Trigger the global animation
+    const event = new Event('app-mounted');
+    document.dispatchEvent(event);
+    
+    return () => {
+      // Cleanup on unmount
+      if (window.typingIntervalId) {
+        clearInterval(window.typingIntervalId);
+        window.typingIntervalId = null;
+      }
+      
+      if (window.deletingIntervalId) {
+        clearInterval(window.deletingIntervalId);
+        window.deletingIntervalId = null;
+      }
+      
+      // Clear the container text
+      if (typingContainer) {
+        typingContainer.textContent = '';
+      }
+    };
+  }, []);
 
       // Deleting phase
       const deletingInterval = setInterval(() => {
