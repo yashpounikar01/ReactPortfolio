@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { name: "Home", href: "#" },
@@ -27,27 +28,30 @@ export default function Navbar() {
           >
             Portfolio
           </motion.div>
-          <ul className="flex items-center gap-2">
-            {navItems.map((item) => (
-              <motion.li
-                key={item.name}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="ghost"
-                  className="text-sm"
-                  onClick={() => {
-                    document.querySelector(item.href)?.scrollIntoView({
-                      behavior: "smooth",
-                    });
-                  }}
+          <div className="flex items-center gap-4">
+            <ul className="flex items-center gap-2">
+              {navItems.map((item) => (
+                <motion.li
+                  key={item.name}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {item.name}
-                </Button>
-              </motion.li>
-            ))}
-          </ul>
+                  <Button
+                    variant="ghost"
+                    className="text-sm"
+                    onClick={() => {
+                      document.querySelector(item.href)?.scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    {item.name}
+                  </Button>
+                </motion.li>
+              ))}
+            </ul>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </motion.nav>

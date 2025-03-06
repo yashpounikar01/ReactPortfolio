@@ -2,6 +2,7 @@ import { Switch, Route } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/providers/theme-provider";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Navbar from "@/components/Navbar";
@@ -18,12 +19,14 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ScrollProgress />
-      <Navbar />
-      <Router />
-      <Toaster />
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="light" storageKey="portfolio-theme">
+      <QueryClientProvider client={queryClient}>
+        <ScrollProgress />
+        <Navbar />
+        <Router />
+        <Toaster />
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
