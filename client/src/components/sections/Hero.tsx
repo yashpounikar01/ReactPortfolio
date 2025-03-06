@@ -1,11 +1,13 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
+  const [typedText, setTypedText] = useState("");
+  
   useEffect(() => {
     const phrases = [
       'Software Engineer',
@@ -13,55 +15,49 @@ export default function Hero() {
       'Backend Developer'
     ];
     
-    const typingContainer = document.getElementById('typing-container');
     let currentPhraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+    let deletingSpeed = 50;
+    let pauseBeforeDelete = 1500;
+    let pauseBeforeType = 500;
     
-    function startTypingAnimation() {
-      if (!typingContainer) return;
-      
+    function typeText() {
       const currentPhrase = phrases[currentPhraseIndex];
-      let charIndex = 0;
-      typingContainer.textContent = '';
       
-      // Typing phase
-      const typingInterval = setInterval(() => {
+      if (!isDeleting) {
+        // Typing
         if (charIndex < currentPhrase.length) {
-          typingContainer.textContent += currentPhrase.charAt(charIndex);
+          setTypedText(currentPhrase.substring(0, charIndex + 1));
           charIndex++;
+          setTimeout(typeText, typingSpeed);
         } else {
-          clearInterval(typingInterval);
-          setTimeout(startDeletingAnimation, 1500); // Wait before starting delete
+          // End of typing
+          isDeleting = true;
+          setTimeout(typeText, pauseBeforeDelete);
         }
-      }, 100);
-    }
-    
-    function startDeletingAnimation() {
-      if (!typingContainer) return;
-      
-      let text = typingContainer.textContent || '';
-      
-      // Deleting phase
-      const deletingInterval = setInterval(() => {
-        if (text.length > 0) {
-          text = text.substring(0, text.length - 1);
-          typingContainer.textContent = text;
+      } else {
+        // Deleting
+        if (charIndex > 0) {
+          setTypedText(currentPhrase.substring(0, charIndex - 1));
+          charIndex--;
+          setTimeout(typeText, deletingSpeed);
         } else {
-          clearInterval(deletingInterval);
+          // End of deleting
+          isDeleting = false;
           currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-          setTimeout(startTypingAnimation, 500); // Wait before typing next phrase
+          setTimeout(typeText, pauseBeforeType);
         }
-      }, 50);
+      }
     }
     
     // Start the animation
-    startTypingAnimation();
+    typeText();
     
-    // Cleanup on component unmount
+    // Cleanup function
     return () => {
-      const typingContainer = document.getElementById('typing-container');
-      if (typingContainer) {
-        typingContainer.textContent = '';
-      }
+      // No explicit cleanup needed for React state
     };
   }, []);
   
@@ -84,7 +80,10 @@ export default function Hero() {
           variants={fadeIn("up", "tween", 0.3, 1)}
           className="w-full flex justify-center mb-6"
         >
-          <div className="typing-text" id="typing-container"></div>
+          <div className="typing-text">
+            {typedText}
+            <span className="typing-cursor"></span>
+          </div>
         </motion.div>
         <motion.p
           variants={fadeIn("up", "tween", 0.4, 1)}

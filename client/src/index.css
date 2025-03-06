@@ -5,29 +5,25 @@
 /* Typing effect styles */
 .typing-text {
   position: relative;
-  margin: 0 auto;
-  text-align: center;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  background: linear-gradient(to right, hsl(var(--primary)), #a855f7);
+  display: inline-block;
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)/0.8));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 2.25rem;
+  font-weight: 600;
 }
 
-.typing-text::after {
-  content: "";
-  position: absolute;
-  right: -5px;
+.typing-cursor {
+  display: inline-block;
   width: 3px;
-  height: 80%;
+  height: 1.5em;
   background-color: hsl(var(--primary));
+  margin-left: 2px;
+  vertical-align: middle;
   animation: cursor-blink 0.8s infinite;
-  margin-left: 3px;
+  position: relative;
+  top: -2px;
 }
 
 @keyframes cursor-blink {
