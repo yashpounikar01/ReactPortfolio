@@ -14,6 +14,7 @@ interface ProjectProps {
 
 export default function ProjectCard({ project }: ProjectProps) {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function ProjectCard({ project }: ProjectProps) {
 
     const handleMouseLeave = () => {
       setRotation({ x: 0, y: 0 });
+      setIsHovered(false);
     };
 
     card.addEventListener("mousemove", handleMouseMove);
@@ -56,28 +58,53 @@ export default function ProjectCard({ project }: ProjectProps) {
       }}
       animate={{
         transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+        scale: isHovered ? 1.02 : 1,
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="cursor-pointer"
+      whileHover={{ scale: 1.02 }}
     >
       <Card className="overflow-hidden h-full">
         <CardHeader className="p-0">
-          <img
+          <motion.img
             src={project.image}
             alt={project.title}
             className="w-full h-48 object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           />
         </CardHeader>
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-          <p className="text-muted-foreground mb-4">{project.description}</p>
-          <div className="flex flex-wrap gap-2">
+          <motion.h3 
+            className="text-xl font-semibold mb-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {project.title}
+          </motion.h3>
+          <motion.p 
+            className="text-muted-foreground mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {project.description}
+          </motion.p>
+          <motion.div 
+            className="flex flex-wrap gap-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             {project.tech.map((tech) => (
               <Badge key={tech} variant="secondary">
                 {tech}
               </Badge>
             ))}
-          </div>
+          </motion.div>
         </CardContent>
       </Card>
     </motion.div>
