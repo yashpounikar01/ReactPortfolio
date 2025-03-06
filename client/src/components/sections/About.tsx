@@ -26,7 +26,7 @@ export default function About() {
                 className="text-lg leading-relaxed text-muted-foreground"
                 variants={fadeIn("up", "tween", 0.3, 1)}
               >
-                I am a passionate full-stack software engineer with a deep understanding of both backend and frontend technologies. My expertise spans across multiple programming languages and frameworks, allowing me to build comprehensive solutions for complex problems.
+                I'm a 3rd-year undergraduate student at PJLCE pursuing my Bachelor's in Technology in the field of Artificial Intelligence. I have explored and gained knowledge about programming languages like C and Java, along with Object-Oriented Programming. Apart from this, web development is my main domain of interest, in which I have quite good knowledge compared to other technologies, and I am still learning.
               </motion.p>
 
               <motion.div 
