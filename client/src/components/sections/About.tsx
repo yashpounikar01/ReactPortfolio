@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn, revealVariant, containerVariant } from "@/lib/motion";
 import { Card, CardContent } from "@/components/ui/card";
