@@ -1,66 +1,69 @@
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
-  const [typedText, setTypedText] = useState("");
-  
   useEffect(() => {
     const phrases = [
       'Software Engineer',
       'Full Stack Developer',
       'Backend Developer'
     ];
-    
+
+    const typingContainer = document.getElementById('typing-container');
     let currentPhraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-    let deletingSpeed = 50;
-    let pauseBeforeDelete = 1500;
-    let pauseBeforeType = 500;
-    
-    function typeText() {
+
+    function startTypingAnimation() {
+      if (!typingContainer) return;
+
       const currentPhrase = phrases[currentPhraseIndex];
-      
-      if (!isDeleting) {
-        // Typing
+      let charIndex = 0;
+      typingContainer.textContent = '';
+
+      // Typing phase
+      const typingInterval = setInterval(() => {
         if (charIndex < currentPhrase.length) {
-          setTypedText(currentPhrase.substring(0, charIndex + 1));
+          typingContainer.textContent += currentPhrase.charAt(charIndex);
           charIndex++;
-          setTimeout(typeText, typingSpeed);
         } else {
-          // End of typing
-          isDeleting = true;
-          setTimeout(typeText, pauseBeforeDelete);
+          clearInterval(typingInterval);
+          setTimeout(startDeletingAnimation, 1500); // Wait before starting delete
         }
-      } else {
-        // Deleting
-        if (charIndex > 0) {
-          setTypedText(currentPhrase.substring(0, charIndex - 1));
-          charIndex--;
-          setTimeout(typeText, deletingSpeed);
-        } else {
-          // End of deleting
-          isDeleting = false;
-          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-          setTimeout(typeText, pauseBeforeType);
-        }
-      }
+      }, 100);
     }
-    
+
+    function startDeletingAnimation() {
+      if (!typingContainer) return;
+
+      let text = typingContainer.textContent || '';
+
+      // Deleting phase
+      const deletingInterval = setInterval(() => {
+        if (text.length > 0) {
+          text = text.substring(0, text.length - 1);
+          typingContainer.textContent = text;
+        } else {
+          clearInterval(deletingInterval);
+          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+          setTimeout(startTypingAnimation, 500); // Wait before typing next phrase
+        }
+      }, 50);
+    }
+
     // Start the animation
-    typeText();
-    
-    // Cleanup function
+    startTypingAnimation();
+
+    // Cleanup on component unmount
     return () => {
-      // No explicit cleanup needed for React state
+      const typingContainer = document.getElementById('typing-container');
+      if (typingContainer) {
+        typingContainer.textContent = '';
+      }
     };
   }, []);
-  
+
   return (
     <section className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -80,8 +83,8 @@ export default function Hero() {
           variants={fadeIn("up", "tween", 0.3, 1)}
           className="w-full flex justify-center mb-6"
         >
-          <div className="typing-text">
-            {typedText}
+          <div id="typing-container" className="typing-text">
+            {/* Typing effect will be rendered here */}
             <span className="typing-cursor"></span>
           </div>
         </motion.div>
