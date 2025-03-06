@@ -6,13 +6,13 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function About() {
   return (
     <section id="about" className="py-20 px-4">
-      <motion.div 
-        className="max-w-4xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariant}
-      >
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12">About Me</h2>
+        <Card>
+          <CardContent className="p-8 space-y-6">
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              I'm a 3rd-year undergraduate student at PJLCE pursuing my Bachelor's in Technology in the field of Artificial Intelligence. I have explored and gained knowledge about programming languages like C and Java, along with Object-Oriented Programming. Apart from this, web development is my main domain of interest, in which I have quite good knowledge compared to other technologies, and I am still learning.
+            </p>
         <motion.h2
           variants={revealVariant}
           className="text-3xl font-bold text-center mb-12"
@@ -57,11 +57,9 @@ export default function About() {
                 <p className="text-muted-foreground">
                   I believe in writing clean, maintainable code and following best practices in software development. My approach combines technical excellence with practical problem-solving to deliver solutions that not only work well but are also sustainable in the long term.
                 </p>
-              </motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </motion.div>
+              </CardContent>
+        </Card>
+      </div>
     </section>
   );
 }
