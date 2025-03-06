@@ -22,9 +22,9 @@ export default function Hero() {
         </motion.h1>
         <motion.div
           variants={fadeIn("up", "tween", 0.3, 1)}
-          className="text-3xl md:text-5xl font-bold mb-6 h-14 flex items-center"
+          className="w-full flex justify-center mb-6"
         >
-          <span className="typing-text"></span>
+          <div className="typing-text" id="typing-container"></div>
         </motion.div>
         <motion.p
           variants={fadeIn("up", "tween", 0.4, 1)}

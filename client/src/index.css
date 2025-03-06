@@ -3,38 +3,59 @@
 @tailwind utilities;
 
 /* Typing effect styles */
-.typing-text::before {
-  content: 'Software Engineer';
-  animation: typing 8s steps(30) infinite;
-  border-right: 3px solid;
-  padding-right: 5px;
-  animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+.typing-text {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background: linear-gradient(to right, hsl(var(--primary)), #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+}
+
+.typing-text::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  width: 2px;
+  height: 70%;
+  background-color: hsl(var(--primary));
+  animation: cursor-blink 0.8s infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.text-animation {
+  width: fit-content;
+  margin: 0 auto;
+  animation: 
+    typing 3s steps(30) infinite,
+    deleting 2s steps(30) infinite,
+    cursor 0.5s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  animation-delay: 0s, 3s, 0s;
+  animation-iteration-count: 1, 1, infinite;
+  animation-fill-mode: forwards, forwards, forwards;
 }
 
 @keyframes typing {
-  0%, 33% {
-    content: 'Software Engineer';
-  }
-  34%, 66% {
-    content: 'Full Stack Developer';
-  }
-  67%, 100% {
-    content: 'Backend Developer';
-  }
+  from { width: 0 }
+  to { width: 100% }
 }
 
-/* Cursor blink effect */
-.typing-text::after {
-  content: '';
-  border-right: 3px solid;
-  animation: blink 0.7s infinite;
-  animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
+@keyframes deleting {
+  from { width: 100% }
+  to { width: 0 }
 }
 
 
