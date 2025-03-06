@@ -40,9 +40,12 @@ export default function Navbar() {
                     variant="ghost"
                     className="text-sm"
                     onClick={() => {
-                      document.querySelector(item.href)?.scrollIntoView({
-                        behavior: "smooth",
-                      });
+                        const targetId = item.href.replace('#', '');
+                        if (targetId) {
+                          document.getElementById(targetId)?.scrollIntoView({
+                            behavior: "smooth",
+                          });
+                        }
                     }}
                   >
                     {item.name}
