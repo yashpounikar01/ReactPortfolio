@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import React from "react";
 import { fadeIn } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
