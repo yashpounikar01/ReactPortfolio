@@ -16,46 +16,23 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 2rem;
+  font-size: 2.25rem;
 }
 
 .typing-text::after {
   content: "";
   position: absolute;
   right: -5px;
-  width: 2px;
-  height: 70%;
+  width: 3px;
+  height: 80%;
   background-color: hsl(var(--primary));
   animation: cursor-blink 0.8s infinite;
+  margin-left: 3px;
 }
 
 @keyframes cursor-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
-}
-
-.text-animation {
-  width: fit-content;
-  margin: 0 auto;
-  animation: 
-    typing 3s steps(30) infinite,
-    deleting 2s steps(30) infinite,
-    cursor 0.5s step-end infinite;
-  white-space: nowrap;
-  overflow: hidden;
-  animation-delay: 0s, 3s, 0s;
-  animation-iteration-count: 1, 1, infinite;
-  animation-fill-mode: forwards, forwards, forwards;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes deleting {
-  from { width: 100% }
-  to { width: 0 }
 }
 
 
